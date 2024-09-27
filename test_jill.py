@@ -27,12 +27,18 @@ class TestJillScript(unittest.TestCase):
             h.update('123456'.encode())
             f.write('larry:' + h.hexdigest() + '\n')
 
+            h = hashlib.sha256()
+
             h.update('password'.encode())
             f.write('curly:' + h.hexdigest() + '\n')
 
+            h = hashlib.sha256()
+
             h.update('qwerty'.encode())
             f.write('moe:' + h.hexdigest() + '\n')
-    
+
+            h = hashlib.sha256()
+
             h.update('maverick'.encode())
             f.write('tom:' + h.hexdigest() + '\n')
 
