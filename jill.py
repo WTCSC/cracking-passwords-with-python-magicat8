@@ -43,7 +43,10 @@ def jill(hash_file, wordlist_file, algorithm='sha256', verbose=False):
         for word in wordlist:
             if hash_password(word, algorithm) == password_hash:
                 elapsed_time = time.time() - start_time  # Time taken to crack
-                found_passwords.append(f"{username}:{word} ({elapsed_time:.4f} seconds)")
+                if verbose:
+                    found_passwords.append(f"{username}:{word} ({elapsed_time:.4f} seconds)")
+                else:
+                    found_passwords.append(f"{username}:{word}")
                 cracked = True
                 break  # Move to the next username once password is found
 
@@ -54,8 +57,9 @@ def jill(hash_file, wordlist_file, algorithm='sha256', verbose=False):
     if found_passwords:
         print("\n".join(found_passwords))
 
-    # Output number of passwords that could not be cracked
-    print(f"\n{not_found_count} passwords could not be cracked.")
+    # Output number of passwords that could not be cracked if verbose is enabled
+    if verbose:
+        print(f"\n{not_found_count} passwords could not be cracked.")
 
     # Return success code if any passwords were found
     return 0 if found_passwords else 2
